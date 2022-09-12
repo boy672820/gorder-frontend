@@ -1,7 +1,6 @@
 {
-  "name": "gorder",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@seonzoo/gorder-frontend",
+  "version": "1.0.0-alpha",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
