@@ -1,6 +1,6 @@
 const pxToRem = (value: number) => `${value / 16}rem`;
 
-const FONT_PRIMARY = 'Do Hyeon'; // Bro Font
+const FONT_PRIMARY = 'Do Hyeon'; // robo
 
 const typography = {
   fontFamily: FONT_PRIMARY,
@@ -39,7 +39,7 @@ const typography = {
     fontSize: pxToRem(17),
   },
   subtitle1: {
-    fontWeight: 600,
+    fontWeight: 100,
     lineHeight: 1.5,
     fontSize: pxToRem(16),
   },
