@@ -4,6 +4,7 @@ import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 import MainLayout from '../layouts/main';
 import Order from '../pages/Order';
 import { LoadingScreen } from '../components';
+import { PATH_PAGE } from './paths';
 
 // ----------------------------------------------------------------------
 
@@ -13,24 +14,26 @@ export default function Router() {
       path: '*',
       element: <LogoOnlyLayout />,
       children: [
-        { path: '500', element: <Page500 /> },
-        { path: '404', element: <Page404 /> },
-        { path: '403', element: <Page403 /> },
-        { path: '*', element: <Navigate to="/404" replace /> },
+        { path: PATH_PAGE.page500, element: <Page500 /> },
+        { path: PATH_PAGE.page404, element: <Page404 /> },
+        { path: PATH_PAGE.page403, element: <Page403 /> },
+        { path: '*', element: <Navigate to={PATH_PAGE.page404} replace /> },
       ],
     },
     {
       path: '/',
       element: <MainLayout />,
       children: [
-        { path: 'order', element: <Order /> },
+        { path: '/', element: <Navigate to={PATH_PAGE.order} replace /> },
+        { path: PATH_PAGE.order, element: <Order /> },
       ],
     },
-    { path: '*', element: <Navigate to="/404" replace /> },
+    { path: '*', element: <Navigate to={PATH_PAGE.page404} replace /> },
   ]);
 }
 
-const Loadable = (Component: ElementType) => (props: any) => (
+const Loadable = (Component: ElementType) => (props: any) =>
+  (
     <Suspense fallback={<LoadingScreen />}>
       <Component {...props} />
     </Suspense>

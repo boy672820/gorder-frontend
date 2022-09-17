@@ -8,7 +8,7 @@ export default function Section({ children, sx }: Props) {
       sx={{
         width: '100%',
         backgroundColor: 'white',
-        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.1)',
         marginTop: 1,
         paddingTop: 2,
         paddingBottom: 2,

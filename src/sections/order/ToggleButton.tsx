@@ -1,4 +1,4 @@
-import { Button as MuiButton, styled, useTheme } from '@mui/material';
+import { Box, Button as MuiButton, styled, Typography, useTheme } from '@mui/material';
 import { useState } from 'react';
 
 const StyledButton = styled(MuiButton)(() => ({
@@ -10,8 +10,13 @@ const StyledButton = styled(MuiButton)(() => ({
 
 // ----------------------------------------------------------------
 
+enum ToggleButtonList {
+  Order = 'order',
+  Delivery = 'Delivery',
+}
+
 type ToggleButtonLocation = 'left' | 'right';
-type ToggleButtonValue = 'order' | 'delivery';
+type ToggleButtonValue = ToggleButtonList.Order | ToggleButtonList.Delivery;
 
 const Button = ({
   children,
@@ -63,20 +68,40 @@ const Button = ({
 };
 
 export default function ToggleButton() {
-  const [value, setValue] = useState<ToggleButtonValue>('delivery');
+  const theme = useTheme();
+
+  const [value, setValue] = useState<ToggleButtonValue>(ToggleButtonList.Delivery);
 
   const handleClick = (value: ToggleButtonValue) => {
     setValue(value);
   };
 
   return (
-    <div>
-      <Button location="left" onClick={handleClick} value="order" active={value === 'order'}>
-        주문
-      </Button>
-      <Button location="right" onClick={handleClick} value="delivery" active={value === 'delivery'}>
-        예약
-      </Button>
-    </div>
+    <Box>
+      <Box>
+        <Button
+          location="left"
+          onClick={handleClick}
+          value={ToggleButtonList.Order}
+          active={value === ToggleButtonList.Order}
+        >
+          주문
+        </Button>
+        <Button
+          location="right"
+          onClick={handleClick}
+          value={ToggleButtonList.Delivery}
+          active={value === ToggleButtonList.Delivery}
+        >
+          예약
+        </Button>
+      </Box>
+      <Box pt={1}>
+        <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontWeight: 'lighter' }}>
+          {ToggleButtonList.Delivery === value && '상품을 예약하고 픽업을 받을 수 있습니다.'}
+          {ToggleButtonList.Order === value && '상품을 직접 주문합니다.'}
+        </Typography>
+      </Box>
+    </Box>
   );
 }
