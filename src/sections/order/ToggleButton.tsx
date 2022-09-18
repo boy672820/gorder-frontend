@@ -77,7 +77,7 @@ export default function ToggleButton() {
   };
 
   return (
-    <Box>
+    <Box pt={1}>
       <Box>
         <Button
           location="left"
@@ -97,7 +97,7 @@ export default function ToggleButton() {
         </Button>
       </Box>
       <Box pt={1}>
-        <Typography variant="caption" sx={{ color: theme.palette.text.secondary, fontWeight: 'lighter' }}>
+        <Typography variant="caption" sx={{ color: theme.palette.text.primary, fontWeight: 'lighter', fontSize: theme.typography.fontSize }}>
           {ToggleButtonList.Delivery === value && '상품을 예약하고 픽업을 받을 수 있습니다.'}
           {ToggleButtonList.Order === value && '상품을 직접 주문합니다.'}
         </Typography>

@@ -1,13 +1,13 @@
-import { Box, Stack, Typography, useTheme } from '@mui/material';
-import { OrderItem } from '../../@types/order';
-import Image from '../../components/Image';
-import { formatPrice } from '../../utils/format';
+import { Box, Button, Stack, Typography, useTheme } from '@mui/material';
+import { OrderItem as OrderItemType } from '../@types/order';
+import Image from './Image';
+import { formatPrice } from '../utils/format';
 
 type Props = {
-  data: OrderItem;
+  data: OrderItemType;
 };
 
-export default function Item({ data }: Props) {
+export default function OrderItem({ data }: Props) {
   const theme = useTheme();
 
   return (
@@ -16,6 +16,7 @@ export default function Item({ data }: Props) {
         bgcolor: 'white',
         boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.1)',
         borderRadius: 3,
+        color: theme.palette.text.primary,
       }}
       display="flex"
       flexDirection="row"
@@ -23,6 +24,7 @@ export default function Item({ data }: Props) {
       alignContent="center"
       p={2}
       mb={1}
+      component={Button}
     >
       <Box display="flex" flexDirection="column" justifyContent="center" alignContent="start">
         <Box>

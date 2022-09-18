@@ -4,6 +4,7 @@ const FONT_PRIMARY = 'Do Hyeon'; // robo
 
 const typography = {
   fontFamily: FONT_PRIMARY,
+  fontWeightLight: 100,
   fontWeightRegular: 400,
   fontWeightMedium: 600,
   fontWeightBold: 700,

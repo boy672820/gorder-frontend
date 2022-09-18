@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Tab } from '@mui/material';
 import { TabContext, TabList } from '@mui/lab';
+import { useLocation, useNavigate } from 'react-router';
 import { Iconify } from '../../../components';
-import { useLocation } from 'react-router';
 import { PATH_PAGE } from '../../../routes/paths';
 
 const TAB_LIST = [
@@ -25,11 +25,16 @@ const TAB_LIST = [
 
 export default function Tabs() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [value, setValue] = useState(location.pathname);
 
+  useEffect(() => {
+    setValue(location.pathname);
+  }, [location]);
+
   const handleChange = (_: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
+    navigate(newValue);
   };
 
   return (
@@ -45,7 +50,9 @@ export default function Tabs() {
             label={tab.label}
             value={tab.value}
             sx={{
-              display: tab.value === '/' ? 'none' : '',
+              ...(tab.value === '/'
+                ? { opacity: 0, position: 'absolute', top: -9999, left: -9999 }
+                : {}),
               color: '#E7EEEF',
               fontWeight: 'regular',
               '&.Mui-selected': {

@@ -1,10 +1,9 @@
 import { Suspense, lazy, ElementType } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
-import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
-import MainLayout from '../layouts/main';
-import Order from '../pages/Order';
 import { LoadingScreen } from '../components';
 import { PATH_PAGE } from './paths';
+import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
+import MainLayout from '../layouts/main';
 
 // ----------------------------------------------------------------------
 
@@ -26,6 +25,7 @@ export default function Router() {
       children: [
         { path: '/', element: <Navigate to={PATH_PAGE.order} replace /> },
         { path: PATH_PAGE.order, element: <Order /> },
+        { path: PATH_PAGE.pickup, element: <Pickup /> },
       ],
     },
     { path: '*', element: <Navigate to={PATH_PAGE.page404} replace /> },
@@ -42,3 +42,6 @@ const Loadable = (Component: ElementType) => (props: any) =>
 const Page500 = Loadable(lazy(() => import('../pages/Page500')));
 const Page403 = Loadable(lazy(() => import('../pages/Page403')));
 const Page404 = Loadable(lazy(() => import('../pages/Page404')));
+
+const Order = Loadable(lazy(() => import('../pages/Order')));
+const Pickup = Loadable(lazy(() => import('../pages/Pickup')));
