@@ -9,7 +9,7 @@ export default function Section({ children, sx }: Props) {
         width: '100%',
         backgroundColor: 'white',
         boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.1)',
-        marginTop: 1,
+        marginTop: 2,
         paddingTop: 2,
         paddingBottom: 2,
         ...sx,

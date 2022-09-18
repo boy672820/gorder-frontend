@@ -11,7 +11,7 @@ export default function ContentContainer({
   const theme = useTheme();
 
   return (
-    <Container sx={{ marginTop: 2 }} maxWidth="sm">
+    <Container sx={{ marginTop: 2.5 }} maxWidth="sm">
       {title && (
         <Box sx={{ position: 'relative', width: 'max-content', mb: 0.5 }}>
           <Typography variant="subtitle1">{title}</Typography>

@@ -1,12 +1,46 @@
-import { Box, Typography, useTheme } from '@mui/material';
 import { Stack } from '@mui/system';
+import { OrderItem } from '../@types/order';
 import ContentContainer from '../components/ContentContainer';
 import Section from '../components/Section';
+import Item from '../sections/order/Item';
 import ToggleButton from '../sections/order/ToggleButton';
 
-export default function Order() {
-  const theme = useTheme();
+const ORDER_ITEMS: OrderItem[] = [
+  {
+    id: 1,
+    name: '아메리카노 ICE',
+    price: 3000,
+    discount: 50,
+    totalPrice: 1500,
+    thumbnail: '/images/americano-ice.webp',
+  },
+  {
+    id: 2,
+    name: '아메리카노 HOT',
+    price: 3000,
+    discount: 50,
+    totalPrice: 1500,
+    thumbnail: '/images/americano-ice.webp',
+  },
+  {
+    id: 3,
+    name: '카페라떼 ICE',
+    price: 3000,
+    discount: 50,
+    totalPrice: 1500,
+    thumbnail: '/images/americano-ice.webp',
+  },
+  {
+    id: 4,
+    name: '카페라떼 HOT',
+    price: 3000,
+    discount: 50,
+    totalPrice: 1500,
+    thumbnail: '/images/americano-ice.webp',
+  },
+];
 
+export default function Order() {
   return (
     <main>
       <Section sx={{ textAlign: 'center' }}>
@@ -15,36 +49,9 @@ export default function Order() {
 
       <ContentContainer title="상품 선택">
         <Stack>
-          <Box
-            sx={{
-              bgcolor: 'white',
-              boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.1)',
-              borderRadius: 3,
-              p: 2,
-              mb: 1,
-            }}
-          >
-            <Stack>
-              <Typography variant="h4" sx={{ fontWeight: 'lighter' }}>
-                아메리카노 ICE
-              </Typography>
-            </Stack>
-            <Stack display="flex" flexDirection="row" alignItems="end">
-              <Typography
-                variant="body2"
-                sx={{
-                  textDecoration: 'line-through',
-                  fontWeight: 'lighter',
-                  color: theme.palette.text.secondary,
-                }}
-              >
-                3,000원
-              </Typography>
-              <Typography variant="body1" sx={{ color: theme.palette.text.secondary }} pl={0.5}>
-                1,500원
-              </Typography>
-            </Stack>
-          </Box>
+          {ORDER_ITEMS.map((data, index) => (
+            <Item key={index} data={data} />
+          ))}
         </Stack>
       </ContentContainer>
     </main>
