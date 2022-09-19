@@ -7,7 +7,7 @@ export default function Avatar() {
         <MuiAvatar
           alt="이선주"
           src="/avatar.png"
-          sx={{ border: '2px solid white', width: 56, height: 56 }}
+          sx={{ border: '2px solid white', width: 64, height: 64 }}
         />
       </Stack>
       <Stack>

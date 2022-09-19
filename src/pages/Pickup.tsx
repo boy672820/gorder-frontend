@@ -1,7 +1,8 @@
-import { Button, Stack, Box } from '@mui/material';
+import { Stack } from '@mui/material';
 import ContentContainer from '../components/ContentContainer';
 import OrderInformation from '../components/OrderInformation';
 import Section from '../components/Section';
+import FixedButton from '../sections/pickup/FixedButton';
 import ItemList from '../sections/pickup/ItemList';
 
 export default function Pickup() {
@@ -17,11 +18,7 @@ export default function Pickup() {
         </Stack>
       </ContentContainer>
 
-      <Box>
-        <Button variant="contained" color="primary" fullWidth>
-          내가 픽업하기
-        </Button>
-      </Box>
+      <FixedButton isCompleted={true} />
     </main>
   );
 }
