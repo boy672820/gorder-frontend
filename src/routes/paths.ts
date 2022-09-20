@@ -4,4 +4,5 @@ export const PATH_PAGE = {
   page500: '500',
   order: 'order',
   pickup: 'pickup',
+  receipt: 'receipt',
 };

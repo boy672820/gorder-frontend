@@ -26,6 +26,7 @@ export default function Router() {
         { path: '/', element: <Navigate to={PATH_PAGE.order} replace /> },
         { path: PATH_PAGE.order, element: <Order /> },
         { path: PATH_PAGE.pickup, element: <Pickup /> },
+        { path: PATH_PAGE.receipt, element: <Receipt /> },
       ],
     },
     { path: '*', element: <Navigate to={PATH_PAGE.page404} replace /> },
@@ -45,3 +46,4 @@ const Page404 = Loadable(lazy(() => import('../pages/Page404')));
 
 const Order = Loadable(lazy(() => import('../pages/Order')));
 const Pickup = Loadable(lazy(() => import('../pages/Pickup')));
+const Receipt = Loadable(lazy(() => import('../pages/Receipt')));

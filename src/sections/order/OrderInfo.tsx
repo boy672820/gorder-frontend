@@ -1,6 +1,6 @@
 import { Container, Box, Typography, useTheme, Divider } from '@mui/material';
 
-export default function OrderInformation() {
+export default function OrderInfo() {
   const theme = useTheme();
 
   return (

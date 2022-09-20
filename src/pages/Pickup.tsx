@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material';
 import ContentContainer from '../components/ContentContainer';
-import OrderInformation from '../components/OrderInformation';
+import OrderInfo from '../sections/order/OrderInfo';
 import Section from '../components/Section';
 import FixedButton from '../sections/pickup/FixedButton';
 import ItemList from '../sections/pickup/ItemList';
@@ -9,16 +9,16 @@ export default function Pickup() {
   return (
     <main>
       <Section>
-        <OrderInformation />
+        <OrderInfo />
       </Section>
 
-      <ContentContainer>
+      <ContentContainer title="픽업 상품">
         <Stack>
           <ItemList />
         </Stack>
       </ContentContainer>
 
-      <FixedButton isCompleted={true} />
+      <FixedButton isCompleted={false} count={6} totalPrice={24000} />
     </main>
   );
 }

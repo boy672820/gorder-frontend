@@ -1,10 +1,13 @@
 import { Button, Box, Container } from '@mui/material';
+import { formatPrice } from '../../utils/format';
 
 type Props = {
   isCompleted: boolean;
+  count: number;
+  totalPrice: number;
 };
 
-export default function FixedButton({ isCompleted }: Props) {
+export default function FixedButton({ isCompleted, count, totalPrice }: Props) {
   return (
     <Box
       sx={{
@@ -49,7 +52,7 @@ export default function FixedButton({ isCompleted }: Props) {
                 left: 16,
               }}
             >
-              6
+              {count}
             </Box>
           )}
 
@@ -65,7 +68,7 @@ export default function FixedButton({ isCompleted }: Props) {
                 fontSize: (theme) => theme.typography.pxToRem(13),
               }}
             >
-              24,000원
+              {formatPrice(totalPrice)}원
             </Box>
           )}
         </Button>
