@@ -3,7 +3,7 @@ import ContentContainer from '../components/ContentContainer';
 import Section from '../components/Section';
 import ReceiptInfo from '../sections/receipt/ReceiptInfo';
 import ItemList from '../sections/order/ItemList';
-import { Container, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import Stepper from '../sections/receipt/Stepper';
 
 export default function Receipt() {
@@ -14,10 +14,13 @@ export default function Receipt() {
       </Section>
 
       <Section>
-        <Container>
+        <Container maxWidth="sm">
           <Typography variant="subtitle1">주문 현황</Typography>
-          <Stepper />
         </Container>
+
+        <Box pt={1.5}>
+          <Stepper activeStep={0} />
+        </Box>
       </Section>
 
       <ContentContainer title="주문 상품">
