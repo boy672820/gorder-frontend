@@ -18,7 +18,7 @@ export default function Pickup() {
         </Stack>
       </ContentContainer>
 
-      <FixedButton isCompleted={false} count={6} totalPrice={24000} />
+      <FixedButton isCompleted={false} count={6} tipPrice={2400} />
     </main>
   );
 }

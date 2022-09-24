@@ -24,7 +24,7 @@ const StepLabel = styled(MuiStepLabel)(({ theme }: { theme: Theme }) => ({
     width: 'max-content',
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: 4,
+    marginTop: '4px !important',
     fontSize: theme.typography.pxToRem(11),
   },
 }));

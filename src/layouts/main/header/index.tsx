@@ -1,6 +1,6 @@
 import { Container, Stack, Box } from '@mui/material';
 import Avatar from './avatar';
-import Cart from './cart';
+import Util from './util';
 import Tabs from './tabs';
 
 export default function Header() {
@@ -43,9 +43,7 @@ export default function Header() {
           maxWidth="sm"
           sx={{ position: 'absolute', top: 6, left: 0, right: 0, margin: '0 auto' }}
         >
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Cart />
-          </Box>
+          <Util />
         </Container>
       </Box>
     </header>

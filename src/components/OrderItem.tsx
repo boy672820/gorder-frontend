@@ -1,13 +1,14 @@
-import { Box, Button, Stack, Typography, useTheme } from '@mui/material';
+import { Box, Stack, Typography, useTheme } from '@mui/material';
 import { OrderItem as OrderItemType } from '../@types/order';
 import Image from './Image';
 import { formatPrice } from '../utils/format';
 
 type Props = {
   data: OrderItemType;
+  component?: React.ElementType;
 };
 
-export default function OrderItem({ data }: Props) {
+export default function OrderItem({ data, component }: Props) {
   const theme = useTheme();
 
   return (
@@ -24,7 +25,7 @@ export default function OrderItem({ data }: Props) {
       alignContent="center"
       p={2}
       mb={1}
-      component={Button}
+      component={component || 'div'}
     >
       <Box display="flex" flexDirection="column" justifyContent="center" alignContent="start">
         <Box>

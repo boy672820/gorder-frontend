@@ -2,7 +2,7 @@ import { Stack } from '@mui/system';
 import ContentContainer from '../components/ContentContainer';
 import Section from '../components/Section';
 import ReceiptInfo from '../sections/receipt/ReceiptInfo';
-import ItemList from '../sections/order/ItemList';
+import ItemList from '../sections/receipt/ItemList';
 import { Box, Container, Typography } from '@mui/material';
 import Stepper from '../sections/receipt/Stepper';
 

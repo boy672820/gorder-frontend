@@ -1,23 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Tab } from '@mui/material';
 import { TabContext, TabList } from '@mui/lab';
 import { useLocation, useNavigate } from 'react-router';
 import { Iconify } from '../../../components';
 import { PATH_PAGE } from '../../../routes/paths';
 
+const TAB_VALUES = [`/${PATH_PAGE.order}`, `/${PATH_PAGE.pickup}`];
+const TAB_COLLECTION = { [`/${PATH_PAGE.order}`]: true, [`/${PATH_PAGE.pickup}`]: true };
+
 const TAB_LIST = [
   {
-    value: '/',
+    value: '',
     icon: '',
     label: '',
   },
   {
-    value: '/' + PATH_PAGE.order,
+    value: TAB_VALUES[0],
     icon: <Iconify icon="fluent:clipboard-text-edit-20-filled" width={18} height={18} />,
     label: '예약·주문',
   },
   {
-    value: '/' + PATH_PAGE.pickup,
+    value: TAB_VALUES[1],
     icon: <Iconify icon="fluent:hand-left-16-regular" width={18} height={18} />,
     label: '픽업하기',
   },
@@ -27,11 +30,16 @@ export default function Tabs() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [value, setValue] = useState(location.pathname);
+  const getValue = useCallback(
+    () => (TAB_COLLECTION[location.pathname] ? location.pathname : ''),
+    [location]
+  );
+
+  const [value, setValue] = useState<string>(getValue());
 
   useEffect(() => {
-    setValue(location.pathname);
-  }, [location]);
+    setValue(getValue());
+  }, [location, getValue]);
 
   const handleChange = (_: React.SyntheticEvent, newValue: string) => {
     navigate(newValue);
@@ -50,7 +58,7 @@ export default function Tabs() {
             label={tab.label}
             value={tab.value}
             sx={{
-              ...(tab.value === '/'
+              ...(tab.value === ''
                 ? { opacity: 0, position: 'absolute', top: -9999, left: -9999 }
                 : {}),
               color: '#E7EEEF',

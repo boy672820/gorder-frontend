@@ -4,10 +4,10 @@ import { formatPrice } from '../../utils/format';
 type Props = {
   isCompleted: boolean;
   count: number;
-  totalPrice: number;
+  tipPrice: number;
 };
 
-export default function FixedButton({ isCompleted, count, totalPrice }: Props) {
+export default function FixedButton({ isCompleted, count, tipPrice }: Props) {
   return (
     <Box
       sx={{
@@ -68,7 +68,7 @@ export default function FixedButton({ isCompleted, count, totalPrice }: Props) {
                 fontSize: (theme) => theme.typography.pxToRem(13),
               }}
             >
-              {formatPrice(totalPrice)}원
+              픽업팁 {formatPrice(tipPrice)}원
             </Box>
           )}
         </Button>
