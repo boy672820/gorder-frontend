@@ -6,9 +6,10 @@ import { formatPrice } from '../utils/format';
 type Props = {
   data: OrderItemType;
   component?: React.ElementType;
+  onContextMenu?: (e: React.MouseEvent) => void;
 };
 
-export default function OrderItem({ data, component }: Props) {
+export default function OrderItem({ data, component, onContextMenu }: Props) {
   const theme = useTheme();
 
   return (
@@ -18,6 +19,7 @@ export default function OrderItem({ data, component }: Props) {
         boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.1)',
         borderRadius: 3,
         color: theme.palette.text.primary,
+        ...(onContextMenu ? { cursor: 'context-menu' } : {}),
       }}
       display="flex"
       flexDirection="row"
@@ -26,6 +28,7 @@ export default function OrderItem({ data, component }: Props) {
       p={2}
       mb={1}
       component={component || 'div'}
+      onContextMenu={onContextMenu}
     >
       <Box display="flex" flexDirection="column" justifyContent="center" alignContent="start">
         <Box>
