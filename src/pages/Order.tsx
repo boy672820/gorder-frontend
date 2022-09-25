@@ -1,8 +1,7 @@
 import { Stack } from '@mui/system';
 import ContentContainer from '../components/ContentContainer';
 import Section from '../components/Section';
-import ToggleButton from '../sections/order/ToggleButton';
-import ItemList from '../sections/order/ItemList';
+import { ToggleButton, ItemList } from '../sections/order';
 
 export default function Order() {
   return (

@@ -1,9 +1,7 @@
 import { Stack } from '@mui/material';
 import ContentContainer from '../components/ContentContainer';
-import OrderInfo from '../sections/order/OrderInfo';
 import Section from '../components/Section';
-import FixedButton from '../sections/pickup/FixedButton';
-import ItemList from '../sections/pickup/ItemList';
+import { OrderInfo, FixedButton, ItemList } from '../sections/pickup';
 
 export default function Pickup() {
   return (

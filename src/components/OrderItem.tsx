@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Stack, Typography, useTheme } from '@mui/material';
 import { OrderItem as OrderItemType } from '../@types/order';
 import Image from './Image';
@@ -6,11 +7,19 @@ import { formatPrice } from '../utils/format';
 type Props = {
   data: OrderItemType;
   component?: React.ElementType;
-  onContextMenu?: (e: React.MouseEvent) => void;
+  onClick?: (e: React.MouseEvent, id: number) => void;
+  choice?: number;
 };
 
-export default function OrderItem({ data, component, onContextMenu }: Props) {
+export default function OrderItem({ data, component, onClick, choice = 0 }: Props) {
   const theme = useTheme();
+
+  const handleClick = (e: React.MouseEvent) => onClick && onClick(e, data.id);
+
+  const activeStyles = {
+    border: `1px solid ${theme.palette.primary.main}`,
+    background: 'rgba(21, 183, 218, 0.05)',
+  };
 
   return (
     <Stack
@@ -19,7 +28,7 @@ export default function OrderItem({ data, component, onContextMenu }: Props) {
         boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.1)',
         borderRadius: 3,
         color: theme.palette.text.primary,
-        ...(onContextMenu ? { cursor: 'context-menu' } : {}),
+        ...(choice ? activeStyles : {}),
       }}
       display="flex"
       flexDirection="row"
@@ -28,8 +37,27 @@ export default function OrderItem({ data, component, onContextMenu }: Props) {
       p={2}
       mb={1}
       component={component || 'div'}
-      onContextMenu={onContextMenu}
+      onClick={handleClick}
+      // {...useContextMenu}
     >
+      {choice > 0 && (
+        <Box
+          sx={{
+            width: 24,
+            height: 24,
+            borderRadius: 12,
+            backgroundColor: theme.palette.primary.main,
+            position: 'absolute',
+            top: -8,
+            left: -10,
+            color: 'white',
+            fontFamily: 'Apple SD Gothic Neo',
+          }}
+        >
+          {choice}
+        </Box>
+      )}
+
       <Box display="flex" flexDirection="column" justifyContent="center" alignContent="start">
         <Box>
           <Typography variant="h4" sx={{ fontWeight: 'lighter' }}>
