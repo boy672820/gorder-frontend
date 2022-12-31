@@ -70,7 +70,7 @@ const Button = ({
 export default function ToggleButton() {
   const theme = useTheme();
 
-  const [value, setValue] = useState<ToggleButtonValue>(ToggleButtonList.Delivery);
+  const [value, setValue] = useState<ToggleButtonValue>(ToggleButtonList.Order);
 
   const handleClick = (value: ToggleButtonValue) => {
     setValue(value);

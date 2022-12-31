@@ -10,8 +10,6 @@ export default function ItemList() {
     setCartList((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
   };
 
-  console.log(cartList);
-
   return (
     <>
       {ORDER_ITEMS.map((data) => (

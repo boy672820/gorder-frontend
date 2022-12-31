@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Stack, Typography, useTheme } from '@mui/material';
+import { Box, Stack, SxProps, Theme, Typography, useTheme } from '@mui/material';
 import { OrderItem as OrderItemType } from '../@types/order';
 import Image from './Image';
 import { formatPrice } from '../utils/format';
@@ -16,8 +16,9 @@ export default function OrderItem({ data, component, onClick, choice = 0 }: Prop
 
   const handleClick = (e: React.MouseEvent) => onClick && onClick(e, data.id);
 
-  const activeStyles = {
-    border: `1px solid ${theme.palette.primary.main}`,
+  const activeStyles: SxProps<Theme> = {
+    // border: `1px solid ${theme.palette.primary.main}`,
+    boxShadow: `0 0 0 1px ${theme.palette.primary.main} inset`,
     background: 'rgba(21, 183, 218, 0.05)',
   };
 
