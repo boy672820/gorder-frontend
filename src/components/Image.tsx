@@ -21,7 +21,7 @@ export default function Image({ src, alt, width, height, sx }: Props) {
         ...sx,
       }}
     >
-      <img src={src} alt={alt} style={{ width: '100%', objectFit: 'cover' }} />
+      <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
     </Box>
   );
 }

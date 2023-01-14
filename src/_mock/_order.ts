@@ -7,7 +7,7 @@ export const ORDER_ITEMS: OrderItem[] = [
     price: 3000,
     discount: 50,
     totalPrice: 1500,
-    thumbnail: '/images/americano.png',
+    thumbnail: '/images/americano.webp',
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const ORDER_ITEMS: OrderItem[] = [
     price: 3000,
     discount: 50,
     totalPrice: 1500,
-    thumbnail: '/images/americano.png',
+    thumbnail: '/images/americano.webp',
   },
   {
     id: 3,
