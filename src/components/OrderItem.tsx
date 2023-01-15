@@ -7,14 +7,12 @@ import { formatPrice } from '../utils/format';
 type Props = {
   data: OrderItemType;
   component?: React.ElementType;
-  onClick?: (e: React.MouseEvent, id: number) => void;
+  onClick?: (e: React.MouseEvent) => void;
   choice?: number;
 };
 
 export default function OrderItem({ data, component, onClick, choice = 0 }: Props) {
   const theme = useTheme();
-
-  const handleClick = (e: React.MouseEvent) => onClick && onClick(e, data.id);
 
   const activeStyles: SxProps<Theme> = {
     // border: `1px solid ${theme.palette.primary.main}`,
@@ -38,8 +36,7 @@ export default function OrderItem({ data, component, onClick, choice = 0 }: Prop
       p={2}
       mb={1}
       component={component || 'div'}
-      onClick={handleClick}
-      // {...useContextMenu}
+      onClick={onClick}
     >
       {choice > 0 && (
         <Box

@@ -37,26 +37,21 @@ type Props = {
   open: boolean;
   onClose: VoidFunction;
   data: OrderItem;
+  count: number;
+  onAddCart: (id: OrderItem['id'], count: number) => void;
+  onIncrease: VoidFunction;
+  onDecrease: VoidFunction;
 };
 
-export default function ItemDialog({ open, onClose, data }: Props) {
-  // states
-  const [count, setCount] = useState<number>(1);
-
-  // ----------------------------------------------------------------
-
-  const handleIncrease = useCallback(() => {
-    setCount((prev) => prev + 1);
-  }, []);
-
-  const handleDecrease = useCallback(() => {
-    if (count > 1) {
-      setCount(count - 1);
-    }
-  }, [count]);
-
-  // ----------------------------------------------------------------
-
+export default function ItemDialog({
+  open,
+  onClose,
+  data,
+  count,
+  onAddCart,
+  onIncrease,
+  onDecrease,
+}: Props) {
   const totalPrice = data.totalPrice * count;
 
   return (
@@ -72,7 +67,7 @@ export default function ItemDialog({ open, onClose, data }: Props) {
         },
       }}
     >
-      <Image src="/images/americano.webp" width="100%" height={240} />
+      <Image src={data.thumbnail} width="100%" height={240} />
       <DialogTitle
         sx={{
           backgroundColor: 'white',
@@ -119,13 +114,13 @@ export default function ItemDialog({ open, onClose, data }: Props) {
             </Typography>
 
             <ButtonGroup size="small">
-              <Button variant="outlined" color="inherit" onClick={handleDecrease}>
+              <Button variant="outlined" color="inherit" onClick={onDecrease}>
                 <Iconify icon="mdi:minus" />
               </Button>
-              <Button variant="outlined" color="inherit">
+              <Button variant="outlined" color="inherit" disableRipple sx={{ cursor: 'default' }}>
                 {count}
               </Button>
-              <Button variant="outlined" color="inherit" onClick={handleIncrease}>
+              <Button variant="outlined" color="inherit" onClick={onIncrease}>
                 <Iconify icon="mdi:plus" />
               </Button>
             </ButtonGroup>
@@ -138,6 +133,7 @@ export default function ItemDialog({ open, onClose, data }: Props) {
           variant="contained"
           size="large"
           sx={{ width: '100%', fontSize: `${18 / 16}rem`, fontWeight: 100, borderRadius: 3 }}
+          onClick={() => onAddCart(data.id, count)}
         >
           {formatPrice(totalPrice)}원 담기
         </Button>
