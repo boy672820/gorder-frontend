@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useState } from 'react';
+import { forwardRef } from 'react';
 import {
   Box,
   Stack,
@@ -13,12 +13,12 @@ import {
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 // utils
-import { formatPrice } from '../../../utils/format';
+import { formatPrice } from '../../utils/format';
 // components
-import { Iconify } from '../../../components';
-import Image from '../../../components/Image';
+import { Iconify } from '..';
+import Image from '../Image';
 // types
-import { OrderItem } from '../../../@types/order';
+import { OrderItem } from '../../@types/order';
 
 // ---------------------------------------------------------
 
@@ -38,7 +38,9 @@ type Props = {
   onClose: VoidFunction;
   data: OrderItem;
   count: number;
-  onAddCart: (id: OrderItem['id'], count: number) => void;
+  isCart: boolean;
+  onAddCart: (item: OrderItem) => void;
+  onRemoveCart: (item: OrderItem) => void;
   onIncrease: VoidFunction;
   onDecrease: VoidFunction;
 };
@@ -48,9 +50,11 @@ export default function ItemDialog({
   onClose,
   data,
   count,
+  isCart,
   onAddCart,
   onIncrease,
   onDecrease,
+  onRemoveCart,
 }: Props) {
   const totalPrice = data.totalPrice * count;
 
@@ -68,6 +72,7 @@ export default function ItemDialog({
       }}
     >
       <Image src={data.thumbnail} width="100%" height={240} />
+
       <DialogTitle
         sx={{
           backgroundColor: 'white',
@@ -113,17 +118,41 @@ export default function ItemDialog({
               수량
             </Typography>
 
-            <ButtonGroup size="small">
-              <Button variant="outlined" color="inherit" onClick={onDecrease}>
-                <Iconify icon="mdi:minus" />
-              </Button>
-              <Button variant="outlined" color="inherit" disableRipple sx={{ cursor: 'default' }}>
-                {count}
-              </Button>
-              <Button variant="outlined" color="inherit" onClick={onIncrease}>
-                <Iconify icon="mdi:plus" />
-              </Button>
-            </ButtonGroup>
+            <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
+              {isCart && (
+                <Button
+                  variant="text"
+                  color="inherit"
+                  size="small"
+                  sx={{
+                    mr: 0.5,
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  onClick={() => {
+                    onRemoveCart(data);
+                    onClose();
+                  }}
+                >
+                  <Iconify icon="ic:baseline-remove-shopping-cart" />
+                  장바구니에서 상품 빼기
+                </Button>
+              )}
+
+              <ButtonGroup size="small">
+                <Button variant="outlined" color="inherit" onClick={onDecrease}>
+                  <Iconify icon="mdi:minus" />
+                </Button>
+                <Button variant="outlined" color="inherit" disableRipple sx={{ cursor: 'default' }}>
+                  {count}
+                </Button>
+                <Button variant="outlined" color="inherit" onClick={onIncrease}>
+                  <Iconify icon="mdi:plus" />
+                </Button>
+              </ButtonGroup>
+            </Box>
           </Box>
         </Stack>
       </DialogContent>
@@ -133,7 +162,7 @@ export default function ItemDialog({
           variant="contained"
           size="large"
           sx={{ width: '100%', fontSize: `${18 / 16}rem`, fontWeight: 100, borderRadius: 3 }}
-          onClick={() => onAddCart(data.id, count)}
+          onClick={() => onAddCart(data)}
         >
           {formatPrice(totalPrice)}원 담기
         </Button>

@@ -1,1 +1,1 @@
-export { default as useLongPress } from './_useLongPress';
+export { default as useCart } from './useCart';
