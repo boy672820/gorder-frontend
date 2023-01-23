@@ -12,13 +12,7 @@ export default function Avatar() {
       </Box>
       <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
         <Typography variant="h4" sx={{ color: 'white', fontWeight: '100' }}>
-          안녕하세요&nbsp;
-        </Typography>
-        <Typography variant="h4" sx={{ color: 'white' }}>
-          이선주
-        </Typography>
-        <Typography variant="h4" sx={{ color: 'white', fontWeight: '100' }}>
-          님
+          안녕하세요&nbsp;이선주님👋
         </Typography>
       </Box>
     </Box>
