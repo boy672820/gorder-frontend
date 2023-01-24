@@ -7,10 +7,10 @@ import ContentContainer from '../../components/ContentContainer';
 // hooks
 import { useCart } from '../../hooks';
 // types
-import { OrderItem } from '../../@types/order';
+import { Product } from '../../@types/product';
 
 type Props = {
-  itemList: OrderItem[];
+  itemList: Product[];
 };
 
 export default function OrderContent({ itemList }: Props) {

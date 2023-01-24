@@ -1,18 +1,18 @@
 import { createContext, ReactNode, useCallback, useState } from 'react';
 // types
-import { OrderItem } from '../@types/order';
+import { Product } from '../@types/product';
 // components
 import { ItemDialog } from '../components/cart';
 
 // ---------------------------------------------------------------------
 
-type CartList = Record<OrderItem['id'], number>;
+type CartList = Record<Product['productId'], number>;
 
 type CartContextType = {
   cartList: CartList;
   count: number;
   totalPrice: number;
-  openItem: (targetItem: OrderItem) => void;
+  openItem: (targetItem: Product) => void;
 };
 type CartProviderProps = { children: ReactNode };
 
@@ -26,7 +26,7 @@ function CartProvider({ children }: CartProviderProps) {
   // states
   const [cartList, setCartList] = useState<CartList>({});
   const [open, setOpen] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<OrderItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<Product | null>(null);
   const [selectedItemCount, setSelectedItemCount] = useState<number>(1);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [totalPrice, setTotalPrice] = useState<number>(0);
@@ -39,14 +39,14 @@ function CartProvider({ children }: CartProviderProps) {
    * 장바구니에 추가
    */
   const handleAddCart = useCallback(
-    (item: OrderItem) => {
-      const prevCount = cartList[item.id] || 0;
+    (item: Product) => {
+      const prevCount = cartList[item.productId] || 0;
 
       setTotalCount((prev) => prev + selectedItemCount - prevCount);
       setTotalPrice(
         (prev) => prev + item.totalPrice * selectedItemCount - item.totalPrice * prevCount
       );
-      setCartList((prev) => ({ ...prev, [item.id]: selectedItemCount }));
+      setCartList((prev) => ({ ...prev, [item.productId]: selectedItemCount }));
       closeDialog();
     },
     [cartList, selectedItemCount, closeDialog]
@@ -56,12 +56,12 @@ function CartProvider({ children }: CartProviderProps) {
    *
    */
   const handleRemoveCart = useCallback(
-    (item: OrderItem) => {
-      const prevCount = cartList[item.id] || 0;
+    (item: Product) => {
+      const prevCount = cartList[item.productId] || 0;
 
       setTotalCount((prev) => prev - prevCount);
       setTotalPrice((prev) => prev - item.totalPrice * prevCount);
-      setCartList(({ [item.id]: _, ...rest }) => rest);
+      setCartList(({ [item.productId]: _, ...rest }) => rest);
     },
     [cartList]
   );
@@ -88,8 +88,8 @@ function CartProvider({ children }: CartProviderProps) {
    * 상품 선택 다이얼로그 오픈
    */
   const openItem = useCallback(
-    (targetItem: OrderItem) => {
-      setSelectedItemCount(cartList[targetItem.id] || 1);
+    (targetItem: Product) => {
+      setSelectedItemCount(cartList[targetItem.productId] || 1);
       setSelectedItem(targetItem);
       setOpen(true);
     },
@@ -110,7 +110,7 @@ function CartProvider({ children }: CartProviderProps) {
             onAddCart={handleAddCart}
             onRemoveCart={handleRemoveCart}
             count={selectedItemCount}
-            isCart={!!cartList[selectedItem.id]}
+            isCart={!!cartList[selectedItem.productId]}
             onIncrease={handleIncrease}
             onDecrease={handleDecrease}
           />

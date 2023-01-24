@@ -3,28 +3,31 @@ import { useCallback } from 'react';
 import { Button } from '@mui/material';
 // components
 import OrderItem from '../../../components/OrderItem';
-import { OrderItem as OrderItemType } from '../../../@types/order';
+import { Product } from '../../../@types/product';
 
 type Props = {
-  data: OrderItemType[];
-  onOpenItem: (orderItem: OrderItemType) => void;
-  cart: Record<string, OrderItemType['id']>;
+  data: Product[];
+  onOpenItem: (product: Product) => void;
+  cart: Record<string, Product['productId']>;
 };
 
 export default function ItemList({ data, onOpenItem, cart }: Props) {
-  const handleClick = useCallback((index: number) => {
-    onOpenItem(data[index]);
-  }, [onOpenItem, data]);
+  const handleClick = useCallback(
+    (index: number) => {
+      onOpenItem(data[index]);
+    },
+    [onOpenItem, data]
+  );
 
   return (
     <>
       {data.map((row, i) => (
         <OrderItem
-          key={row.id}
+          key={row.productId}
           data={row}
+          choice={cart[row.productId] || 0}
           component={Button}
           onClick={() => handleClick(i)}
-          choice={cart[row.id] || 0}
         />
       ))}
     </>

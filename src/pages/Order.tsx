@@ -6,19 +6,28 @@ import { OrderContent, ToggleButton } from '../sections/order';
 // providers
 import { CartProvider } from '../contexts';
 // types
-import type { OrderItem } from '../@types/order';
-// mock
-import { ORDER_ITEMS } from '../_mock/_order';
+import { Product } from '../@types/product';
+// redux
+import { dispatch, useSelector } from '../redux/store';
+import { getProducts } from '../redux/slices/product';
 
 // --------------------------------------------------------------------------------
 
 export default function Order() {
   // states
-  const [itemList, setItemList] = useState<OrderItem[]>([]);
+  const [itemList, setItemList] = useState<Product[]>([]);
+
+  const { products } = useSelector((state) => state.product);
 
   useEffect(() => {
-    setItemList(ORDER_ITEMS);
+    dispatch(getProducts());
   }, []);
+
+  useEffect(() => {
+    if (products.length) {
+      setItemList(products);
+    }
+  }, [products]);
 
   // --------------------------------------------------------------------------------
 

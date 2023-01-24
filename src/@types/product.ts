@@ -6,3 +6,9 @@ export type Product = {
   discountPrice: number;
   totalPrice: number;
 };
+
+export type ProductState = {
+  products: Product[];
+  isLoading: boolean;
+  error: Error | string | null;
+};

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Box, Stack, SxProps, Theme, Typography, useTheme } from '@mui/material';
-import { OrderItem as OrderItemType } from '../@types/order';
+import { Product } from '../@types/product';
 import Image from './Image';
 import { formatPrice } from '../utils/format';
 
 type Props = {
-  data: OrderItemType;
+  data: Product;
   component?: React.ElementType;
   onClick?: (e: React.MouseEvent) => void;
   choice?: number;
@@ -56,9 +56,9 @@ export default function OrderItem({ data, component, onClick, choice = 0 }: Prop
         </Box>
       )}
 
-      <Box display="flex" flexDirection="column" justifyContent="center" alignContent="start">
+      <Box display="flex" flexDirection="column" justifyContent="left" alignContent="start">
         <Box>
-          <Typography variant="h4" sx={{ fontWeight: 'lighter' }}>
+          <Typography variant="h4" sx={{ fontWeight: 'lighter', textAlign: 'left' }}>
             {data.name}
           </Typography>
         </Box>
@@ -72,14 +72,14 @@ export default function OrderItem({ data, component, onClick, choice = 0 }: Prop
             }}
             pl={0.5}
           >
-            {formatPrice(data.price)}원
+            {formatPrice(data.basePrice)}원
           </Typography>
           <Typography variant="body1" sx={{ color: theme.palette.text.secondary }} pl={0.5}>
             {formatPrice(data.totalPrice)}원
           </Typography>
         </Box>
       </Box>
-      <Image src={data.thumbnail} alt={data.name} width={60} height={60} />
+      <Image src="/images/americano.webp" alt={data.name} width={60} height={60} />
     </Stack>
   );
 }

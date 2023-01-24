@@ -18,7 +18,7 @@ import { formatPrice } from '../../utils/format';
 import { Iconify } from '..';
 import Image from '../Image';
 // types
-import { OrderItem } from '../../@types/order';
+import { Product } from '../../@types/product';
 
 // ---------------------------------------------------------
 
@@ -36,11 +36,11 @@ const Transition = forwardRef(function Transition(
 type Props = {
   open: boolean;
   onClose: VoidFunction;
-  data: OrderItem;
+  data: Product;
   count: number;
   isCart: boolean;
-  onAddCart: (item: OrderItem) => void;
-  onRemoveCart: (item: OrderItem) => void;
+  onAddCart: (item: Product) => void;
+  onRemoveCart: (item: Product) => void;
   onIncrease: VoidFunction;
   onDecrease: VoidFunction;
 };
@@ -71,7 +71,7 @@ export default function ItemDialog({
         },
       }}
     >
-      <Image src={data.thumbnail} width="100%" height={240} />
+      <Image src="/images/americano.webp" width="100%" height={240} />
 
       <DialogTitle
         sx={{
@@ -105,7 +105,7 @@ export default function ItemDialog({
                 }}
                 pl={0.5}
               >
-                {formatPrice(data.price)}원
+                {formatPrice(data.basePrice)}원
               </Typography>
               <Typography variant="h4" pl={0.5} sx={{ fontWeight: 100 }}>
                 {formatPrice(data.totalPrice)}원
