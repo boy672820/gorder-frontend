@@ -6,3 +6,9 @@ export const PATH_PAGE = {
   pickup: 'pickup',
   receipt: 'receipt',
 };
+
+export const PATH_AUTH = {
+  root: 'auth',
+  signin: 'signin',
+  redirect: 'redirect',
+};

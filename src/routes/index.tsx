@@ -1,7 +1,8 @@
 import { Suspense, lazy, ElementType } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import { LoadingScreen } from '../components';
-import { PATH_PAGE } from './paths';
+import { PATH_AUTH, PATH_PAGE } from './paths';
+// layouts
 import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 import MainLayout from '../layouts/main';
 
@@ -29,6 +30,14 @@ export default function Router() {
         { path: PATH_PAGE.receipt, element: <Receipt /> },
       ],
     },
+    {
+      path: PATH_AUTH.root,
+      element: <LogoOnlyLayout />,
+      children: [
+        { path: PATH_AUTH.signin, element: <SignIn /> },
+        { path: PATH_AUTH.redirect, element: <RedirectSlack /> },
+      ],
+    },
     { path: '*', element: <Navigate to={PATH_PAGE.page404} replace /> },
   ]);
 }
@@ -47,3 +56,6 @@ const Page404 = Loadable(lazy(() => import('../pages/Page404')));
 const Order = Loadable(lazy(() => import('../pages/Order')));
 const Pickup = Loadable(lazy(() => import('../pages/Pickup')));
 const Receipt = Loadable(lazy(() => import('../pages/Receipt')));
+
+const SignIn = Loadable(lazy(() => import('../pages/auth/SignIn')));
+const RedirectSlack = Loadable(lazy(() => import('../pages/auth/RedirectSlack')));

@@ -4,7 +4,8 @@ export default function Footer() {
   return (
     <Box
     sx={{
-      py: 5,
+      py: 3,
+      pb: 13,
       textAlign: 'center',
       position: 'relative',
       bgcolor: 'background.default',

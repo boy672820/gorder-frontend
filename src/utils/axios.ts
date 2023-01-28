@@ -17,7 +17,7 @@ axiosInstance.interceptors.response.use(
 
 export default function getAxios(apiTag?: string) {
   if (apiTag) {
-    axios.defaults.baseURL = axios.defaults.baseURL + apiTag;
+    axiosInstance.defaults.baseURL = axiosInstance.defaults.baseURL + `/${apiTag}`;
   }
 
   return axiosInstance;
