@@ -1,10 +1,16 @@
-import React from 'react';
 import './App.css';
+import { AuthProvider } from './contexts/AuthContext';
 import Router from './routes';
 import ThemeProvider from './theme';
 
 function App() {
-  return <ThemeProvider><Router /></ThemeProvider>;
+  return (
+    <AuthProvider>
+      <ThemeProvider>
+        <Router />
+      </ThemeProvider>
+    </AuthProvider>
+  );
 }
 
 export default App;

@@ -1,4 +1,9 @@
-export type AuthUser = Record<string, any>;
+export type AuthUser = {
+  email: string;
+  name: string;
+};
+
+export type AuthResult = AuthUser & { accessToken: string; refreshToken: string };
 
 export type AuthState = {
   isAuthenticated: boolean;
@@ -27,15 +32,7 @@ export type ActionMap<M extends { [index: string]: any }> = {
       };
 };
 
-export type AuthContextType = {
-  isAuthenticated: boolean;
-  isInitialized: boolean;
-  user: AuthUser | null;
-  signin: () => Promise<void>;
-  signout: () => Promise<void>;
-};
-
-type AuthPayload = {
+export type AuthPayload = {
   [Types.Initial]: {
     isAuthenticated: boolean;
     user: AuthUser | null;
@@ -44,4 +41,12 @@ type AuthPayload = {
     user: AuthUser | null;
   };
   [Types.Signout]: undefined;
+};
+
+export type AuthContextType = {
+  isAuthenticated: boolean;
+  isInitialized: boolean;
+  user: AuthUser | null;
+  signin: (code: string) => Promise<void>;
+  signout: () => Promise<void>;
 };

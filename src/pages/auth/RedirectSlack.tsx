@@ -7,7 +7,13 @@ export default function RedirectSlack() {
 
   const code = query.get('code');
 
-  useEffect(() => {}, [code]);
+  useEffect(() => {
+    if (code) {
+      window.opener.postMessage({ code }, '*');
+      window.close();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!code) {
     return <Page404 />;

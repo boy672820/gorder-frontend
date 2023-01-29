@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Grid, Stack, Typography } from '@mui/material';
+import { useNavigate } from 'react-router';
+import { useAuth } from '../../hooks';
+import { PATH_PAGE } from '../../routes/paths';
+//
 import { SLACK_CLINET_ID, SLACK_USER_SCOPE } from '../../config';
 
 export default function SignIn() {
+  const navigate = useNavigate();
+  const { signin, isAuthenticated } = useAuth();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(`/${PATH_PAGE.order}`);
+    }
+
+    window.addEventListener('message', (e) => {
+      if (e.data?.code) {
+        signin(e.data.code).then(() => {
+          navigate(`/${PATH_PAGE.order}`);
+        });
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]);
+
   const handlePopup = (e: React.MouseEvent) => {
     e.preventDefault();
+
     const width = 500;
     const height = 700;
     const left = window.screen.width;

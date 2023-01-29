@@ -1,5 +1,14 @@
 import { createContext, ReactNode, useEffect, useReducer } from 'react';
-import { AuthActions, AuthContextType, AuthState, Types } from '../@types/auth';
+import {
+  AuthActions,
+  AuthContextType,
+  AuthPayload,
+  AuthState,
+  AuthUser,
+  Types,
+} from '../@types/auth';
+import { AuthApi } from '../api';
+import { getSession, setSession } from '../utils/auth';
 
 const initialState: AuthState = {
   isAuthenticated: false,
@@ -35,17 +44,95 @@ const reducer = (state: AuthState, action: AuthActions) => {
 
 // ----------------------------------------------------------------------------------------------
 
+const useAuthReducer = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const onInitAuth = (user: AuthUser) => {
+    dispatch({
+      type: Types.Initial,
+      payload: {
+        isAuthenticated: true,
+        user,
+      },
+    });
+  };
+
+  const onInitUnauth = () => {
+    dispatch({
+      type: Types.Initial,
+      payload: {
+        isAuthenticated: false,
+        user: null,
+      },
+    });
+  };
+
+  const onSignin = (payload: AuthPayload[Types.Signin]) =>
+    dispatch({
+      type: Types.Signin,
+      payload,
+    });
+
+  const onSignout = () => {
+    dispatch({ type: Types.Signout });
+  };
+
+  return {
+    state,
+    //
+    onInitAuth,
+    onInitUnauth,
+    //
+    onSignin,
+    onSignout,
+  };
+};
+
+// ----------------------------------------------------------------------------------------------
+
 type AuthProviderProps = { children: ReactNode };
 
 function AuthProvider({ children }: AuthProviderProps) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const { state, onInitAuth, onInitUnauth, onSignin, onSignout } = useAuthReducer();
+
+  // --------------------------------------------------------------------------------------------
 
   useEffect(() => {
-    (async () => {})();
+    (async () => {
+      const token = getSession();
+
+      if (token) {
+        setSession(token);
+
+        const user = await AuthApi.me();
+
+        onInitAuth(user);
+      } else {
+        onInitUnauth();
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const signin = async () => {};
-  const signout = async () => {};
+  // --------------------------------------------------------------------------------------------
+
+  const signin = async (code: string) => {
+    if (state.user) {
+      return;
+    }
+
+    const { accessToken, refreshToken, ...user } = await AuthApi.signin(code);
+
+    setSession({ accessToken, refreshToken });
+    onSignin({ user });
+  };
+
+  const signout = async () => {
+    setSession(null);
+    onSignout();
+  };
+
+  // --------------------------------------------------------------------------------------------
 
   return (
     <AuthContext.Provider value={{ ...state, signin, signout }}>{children}</AuthContext.Provider>

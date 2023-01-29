@@ -1,8 +1,8 @@
 import React from 'react';
-import { useLocation as useReactRouterDomLocation } from 'react-router';
+import { useLocation as useReactRouterLocation } from 'react-router';
 
 export default function useLocation() {
-  const location = useReactRouterDomLocation();
+  const location = useReactRouterLocation();
 
   const { search } = location;
 

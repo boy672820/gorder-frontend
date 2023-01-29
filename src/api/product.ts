@@ -1,11 +1,9 @@
 import { Product } from '../@types/product';
-import getAxios from '../utils/axios';
-
-const axios = getAxios('product');
+import axios from '../utils/axios';
 
 export default class ProductApi {
   static async getAll() {
-    const { data } = await axios.get<Product>('');
+    const { data } = await axios.get<Product>('/product');
 
     return data;
   }

@@ -15,10 +15,4 @@ axiosInstance.interceptors.response.use(
   (error) => Promise.reject((error.response && error.response.data) || 'Something went wrong')
 );
 
-export default function getAxios(apiTag?: string) {
-  if (apiTag) {
-    axiosInstance.defaults.baseURL = axiosInstance.defaults.baseURL + `/${apiTag}`;
-  }
-
-  return axiosInstance;
-}
+export default axiosInstance;
