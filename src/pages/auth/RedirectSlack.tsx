@@ -1,16 +1,17 @@
 import { useEffect } from 'react';
 import { useLocation } from '../../hooks';
+import Page404 from '../Page404';
 
 export default function RedirectSlack() {
   const { query } = useLocation();
 
-  useEffect(() => {
-    const code = query.get('code');
+  const code = query.get('code');
 
-    console.log(code);
+  useEffect(() => {}, [code]);
 
-    window.close();
-  }, []);
+  if (!code) {
+    return <Page404 />;
+  }
 
   return <></>;
 }

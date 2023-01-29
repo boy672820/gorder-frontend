@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid, Typography } from '@mui/material';
+import { Container, Grid, Stack, Typography } from '@mui/material';
 import { SLACK_CLINET_ID, SLACK_USER_SCOPE } from '../../config';
 
 export default function SignIn() {
@@ -29,23 +29,26 @@ export default function SignIn() {
           style={{ minHeight: '100vh' }}
         >
           <Grid item xs={12}>
-            <Typography variant="h5">슬랙(Slack)으로 로그인 후 이용할 수 있습니다🙏</Typography>
+            <Typography variant="h5">로그인 후 이용할 수 있습니다🙏</Typography>
           </Grid>
           <Grid item xs={12} pt={1}>
-            <a
-              href={`https://slack.com/oauth/v2/authorize?client_id=${SLACK_CLINET_ID}&user_scope=${SLACK_USER_SCOPE}&scope=incoming-webhook`}
-              rel="noopener noreferrer"
-              target="_blank"
-              onClick={handlePopup}
-            >
-              <img
-                alt="Add to Slack"
-                height="40"
-                width="139"
-                src="https://platform.slack-edge.com/img/add_to_slack.png"
-                srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"
-              />
-            </a>
+            <Stack>
+              <a
+                href={`https://slack.com/oauth/v2/authorize?client_id=${SLACK_CLINET_ID}&user_scope=${SLACK_USER_SCOPE}&scope=incoming-webhook`}
+                rel="noopener noreferrer"
+                target="_blank"
+                onClick={handlePopup}
+              >
+                <img
+                  alt="Add to Slack"
+                  height="40"
+                  width="139"
+                  src="https://platform.slack-edge.com/img/add_to_slack.png"
+                  srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"
+                />
+              </a>
+              <Typography variant="caption">Slack으로 로그인하기</Typography>
+            </Stack>
           </Grid>
         </Grid>
       </Container>
