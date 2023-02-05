@@ -11,7 +11,7 @@ const initialState: ProductState = {
 };
 
 const slice = createSlice({
-  name: 'order',
+  name: 'product',
   initialState,
   reducers: {
     startLoading(state) {

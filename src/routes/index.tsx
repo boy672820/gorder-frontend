@@ -33,10 +33,7 @@ export default function Router() {
     {
       path: PATH_AUTH.root,
       element: <LogoOnlyLayout />,
-      children: [
-        { path: PATH_AUTH.signin, element: <SignIn /> },
-        { path: PATH_AUTH.redirect, element: <RedirectSlack /> },
-      ],
+      children: [{ path: PATH_AUTH.redirect, element: <RedirectSlack /> }],
     },
     { path: '*', element: <Navigate to={PATH_PAGE.page404} replace /> },
   ]);
@@ -57,5 +54,4 @@ const Order = Loadable(lazy(() => import('../pages/Order')));
 const Pickup = Loadable(lazy(() => import('../pages/Pickup')));
 const Receipt = Loadable(lazy(() => import('../pages/Receipt')));
 
-const SignIn = Loadable(lazy(() => import('../pages/auth/SignIn')));
 const RedirectSlack = Loadable(lazy(() => import('../pages/auth/RedirectSlack')));
